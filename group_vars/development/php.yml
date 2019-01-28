@@ -4,6 +4,8 @@ php_display_startup_errors: 'On'
 php_track_errors: 'On'
 php_mysqlnd_collect_memory_statistics: 'On'
 php_opcache_enable: 0
+php_max_execution_time: 300
+php_memory_limit: 256M
 
 xdebug_remote_enable: 1
 xdebug_remote_connect_back: 1
