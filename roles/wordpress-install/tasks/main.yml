@@ -76,3 +76,57 @@
     chdir: "{{ www_root }}/{{ item.key }}/{{ item.value.current_path | default('current') }}/"
   with_dict: "{{ wordpress_sites }}"
   when: item.value.site_install | default(true) and item.value.multisite.enabled | default(false)
+
+- name: Activate theme "spaces-structure"
+  command: wp theme activate spaces-structure --allow-root
+  args:
+    chdir: "{{ www_root }}/{{ item.key }}/{{ item.value.current_path | default('current') }}/"
+  when: item.value.site_install | default(true)
+
+- name: Create blog "public"
+  command: wp site create --slug=public --title="Public Login" --allow-root
+  args:
+    chdir: "{{ www_root }}/{{ item.key }}/{{ item.value.current_path | default('current') }}/"
+  when: item.value.site_install | default(true)
+
+- name: Activate theme "public2" for blog "public"
+  command: wp theme activate public2 --url={{ site_env.wp_home }}/public --allow-root
+  args:
+    chdir: "{{ www_root }}/{{ item.key }}/{{ item.value.current_path | default('current') }}/"
+  when: item.value.site_install | default(true)
+
+- name: Create site "home"
+  command: wp site create --slug=home --title="Home" --allow-root
+  args:
+    chdir: "{{ www_root }}/{{ item.key }}/{{ item.value.current_path | default('current') }}/"
+  when: item.value.site_install | default(true)
+
+- name: Activate theme "defaultspace" for site "home"
+  command: wp theme activate defaultspace --url=spaces.test/home --allow-root
+  args:
+    chdir: "{{ www_root }}/{{ item.key }}/{{ item.value.current_path | default('current') }}/"
+  when: item.value.site_install | default(true)
+
+- name: Activate plugin "spaces-core" for network
+  command: wp plugin activate spaces-core --network --allow-root
+  args:
+    chdir: "{{ www_root }}/{{ item.key }}/{{ item.value.current_path | default('current') }}/"
+  when: item.value.site_install | default(true)
+
+- name: Activate plugin "spaces-frame" for network
+  command: wp plugin activate spaces-frame --network --allow-root
+  args:
+    chdir: "{{ www_root }}/{{ item.key }}/{{ item.value.current_path | default('current') }}/"
+  when: item.value.site_install | default(true)
+
+- name: Create page "people"
+  command: wp post create --post_status=publish --post_type=page --page_template=page-people.php --post_title="people" --allow-root
+  args:
+    chdir: "{{ www_root }}/{{ item.key }}/{{ item.value.current_path | default('current') }}/"
+  when: item.value.site_install | default(true)
+
+- name: Create page "New Space"
+  command: wp post create --post_status=publish --post_type=page --page_template=page-new-space.php --post_title="New Space" --allow-root
+  args:
+    chdir: "{{ www_root }}/{{ item.key }}/{{ item.value.current_path | default('current') }}/"
+  when: item.value.site_install | default(true)
