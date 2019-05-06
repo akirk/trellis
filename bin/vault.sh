@@ -27,7 +27,10 @@ if [[ $MODE -ne "encrypt" && $MODE -ne "encrypt" ]]; then
   exit 127;
 fi
 
-FILES="group_vars/all/vault.yml group_vars/development/vault.yml group_vars/staging/vault.yml"; shift
+FILES=$@;
+
+[[ $# -lt 1 ]] && { FILES="group_vars/all/vault.yml group_vars/development/vault.yml group_vars/staging/vault.yml"; }
+
 VAULT_CMD="ansible-vault $MODE $FILES"
 
 $VAULT_CMD
