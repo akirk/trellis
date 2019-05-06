@@ -1,14 +1,23 @@
 #!/bin/bash
 shopt -s nullglob
 
-show_usage() {
-  echo "Usage: vault <mode>
+DEFAULT_FILES="group_vars/all/vault.yml group_vars/development/vault.yml group_vars/staging/vault.yml";
 
-<mode> can be ("encrypt", "decrypt")
+show_usage() {
+  echo "Usage: vault <command> [<options>...]
+Just a proxy of ansible-vault with default files:
+$DEFAULT_FILES
+
+See 'ansible-vault --help' for more information.
+
+See 'ansible-vault <command> --help' for more information on a specific
+command.
 
 Examples:
   vault encrypt
+  vault view
   vault decrypt
+  vault --help
 "
 }
 
@@ -19,18 +28,11 @@ do
   [[ $arg = -h ]] && { show_usage; exit 0; }
 done
 
-MODE="$1"; shift
-
-if [[ $MODE -ne "encrypt" && $MODE -ne "encrypt" ]]; then
-  echo "Error: $MODE is not a valid vault command."
-  show_usage;
-  exit 127;
-fi
-
+COMMAND="$1"; shift
 FILES=$@;
 
-[[ $# -lt 1 ]] && { FILES="group_vars/all/vault.yml group_vars/development/vault.yml group_vars/staging/vault.yml"; }
+[[ $# -lt 1 ]] && { FILES="$DEFAULT_FILES"; }
 
-VAULT_CMD="ansible-vault $MODE $FILES"
+VAULT_CMD="ansible-vault $COMMAND $FILES"
 
 $VAULT_CMD
