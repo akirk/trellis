@@ -9,3 +9,4 @@ php_memory_limit: 256M
 
 xdebug_remote_enable: 1
 xdebug_remote_connect_back: 1
+xdebug_remote_autostart: 1
