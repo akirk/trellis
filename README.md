@@ -1,119 +1,97 @@
-# Trellis
-[![Release](https://img.shields.io/github/release/roots/trellis.svg?style=flat-square)](https://github.com/roots/trellis/releases)
-[![Build Status](https://img.shields.io/travis/roots/trellis.svg?style=flat-square)](https://travis-ci.org/roots/trellis)
+# Trellis for Spaces
 
-Ansible playbooks for setting up a LEMP stack for WordPress.
+Contains a WordPress LEMP stack for local development and to provision and deploy to remote servers for the SLE Spaces. Fork of [Trellis](https://github.com/roots/trellis) with minor adjustments. Checkout the Trellis [Documentation](https://roots.io/trellis/docs) and [GitHub repository](https://github.com/roots/trellis).
 
 - Local development environment with Vagrant
 - High-performance production servers
 - Zero-downtime deploys for your [Bedrock](https://roots.io/bedrock/)-based WordPress sites
 
-## What's included
+## Quick Start
 
-Trellis will configure a server with the following and more:
+Be sure to have installed the following requirements:
 
-* Ubuntu 18.04 Bionic LTS
-* Nginx (with optional FastCGI micro-caching)
-* PHP 7.3
-* MariaDB (a drop-in MySQL replacement)
-* SSL support (scores an A+ on the [Qualys SSL Labs Test](https://www.ssllabs.com/ssltest/))
-* Let's Encrypt for free SSL certificates
-* HTTP/2 support (requires SSL)
-* Composer
-* WP-CLI
-* sSMTP (mail delivery)
-* MailHog
-* Memcached
-* Fail2ban and ferm
+- [Composer](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx)
+- [Virtualbox](https://www.virtualbox.org/wiki/Downloads) >= 4.3.10
+- [Vagrant](https://www.vagrantup.com/downloads.html) >= 2.1.0
+- [vagrant-hostmanager](https://github.com/devopsgroup-io/vagrant-hostmanager) (optional)
+- **Windows user?** [Read the Windows getting started docs](https://roots.io/getting-started/docs/windows-development-environment-trellis/) for slightly different installation instructions.
 
-## Documentation
+### 1. Clone Repository
 
-Full documentation is available at [https://roots.io/trellis/docs/](https://roots.io/trellis/docs/).
-
-## Requirements
-
-Make sure all dependencies have been installed before moving on:
-
-* [Composer](https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx)
-* [Virtualbox](https://www.virtualbox.org/wiki/Downloads) >= 4.3.10
-* [Vagrant](https://www.vagrantup.com/downloads.html) >= 2.1.0
-
-**Windows user?** [Read the Windows getting started docs](https://roots.io/getting-started/docs/windows-development-environment-trellis/) for slightly different installation instructions.
-
-## Installation
-
-The recommended directory structure for a Trellis project looks like:
-
-```shell
-example.com/      # → Root folder for the project
-├── trellis/      # → Your clone of this repository
-└── site/         # → A Bedrock-based WordPress site
-    └── web/
-        ├── app/  # → WordPress content directory (themes, plugins, etc.)
-        └── wp/   # → WordPress core (don't touch!)
+```sh
+    # Create and enter project directory
+    mkdir doll
+    cd doll
+    # Clone Trellis into `trellis` and checkout `spaces` branch.
+    git clone --recursive git@bitbucket.org:lukasbesch/trellis-spaces.git trellis -b spaces
+    # Clone Spaces into `spaces` and checkout `merge-bedrock` branch.
+    git clone --recursive git@bitbucket.org:lukasbesch/spaces.git spaces -b merge-bedrock
 ```
+
+Checkout the [instructions how to manage (multiple) remote instances](#markdown-header-managing-multiple-remote-instances).
 
 See a complete working example in the [roots-example-project.com repo](https://github.com/roots/roots-example-project.com).
 
-1. Create a new project directory:
-```plain
-$ mkdir example.com && cd example.com
-```
-2. Install Trellis:
-```plain
-$ git clone --depth=1 git@github.com:roots/trellis.git && rm -rf trellis/.git
-```
-3. Install Bedrock into the `site` directory:
-```plain
-$ composer create-project roots/bedrock site
+### 2. Start and provision your local server
+
+This will take 10-30 minutes on your first run and set up a virtual server from ground up. It installs spaces with some default blogs & settings. Check the `./roles/wordpress-install/tasks/main.yml` for more info.
+
+```sh
+    cd trellis
+    vagrant up
 ```
 
-## Local development setup
+### 3. SSH into your (local virtual vagrant) server to run commands.
 
-1. Configure your WordPress sites in `group_vars/development/wordpress_sites.yml` and in `group_vars/development/vault.yml`
-2. Ensure you're in the trellis directory: `cd trellis`
-3. Run `vagrant up`
+```sh
+    vagrant ssh -- -t 'cd /srv/www/spaces/current; /bin/bash'
+    # run commands from here, for example:
+    # composer install
+    exit
+```
 
-[Read the local development docs](https://roots.io/trellis/docs/local-development-setup/) for more information.
+### 4. done :) access via *spaces.test*
 
-## Remote server setup (staging/production)
+---
 
-For remote servers, installing Ansible locally is an additional requirement. See the [docs](https://roots.io/trellis/docs/remote-server-setup/#requirements) for more information.
+## Managing (multiple) remote instances
 
-A base Ubuntu 18.04 (Bionic) server is required for setting up remote servers. OS X users must have [passlib](http://pythonhosted.org/passlib/install.html#installation-instructions) installed.
+Create your own private fork of Trellis with multiple sites configured in its `wordpress_sites.yml`. Clone it into `trellis`. All sites will run on the same virtual machine.
 
-1. Configure your WordPress sites in `group_vars/<environment>/wordpress_sites.yml` and in `group_vars/<environment>/vault.yml` (see the [Vault docs](https://roots.io/trellis/docs/vault/) for how to encrypt files containing passwords)
-2. Add your server IP/hostnames to `hosts/<environment>`
-3. Specify public SSH keys for `users` in `group_vars/all/users.yml` (see the [SSH Keys docs](https://roots.io/trellis/docs/ssh-keys/))
-4. Run `ansible-playbook server.yml -e env=<environment>` to provision the server
+Ideally create a separate, private fork of Trellis for each instance so you can give exclusive access to customers or their DevOps.
 
-[Read the remote server docs](https://roots.io/trellis/docs/remote-server-setup/) for more information.
+For provisioning and deploying, read the [Remote Server Setup Documentation](https://roots.io/trellis/docs/remote-server-setup/).
+Be sure to encrypt sensitive data using a [`.vault_pass`](https://roots.io/trellis/docs/vault/) file! (check `./bin/vault.sh`).
 
-## Deploying to remote servers
+Also create forks for the Spaces repository and clone them next to the `trellis` folder.
+Ideally, they should have a child theme and eventually slightly different plugins defined in `composer.json`. Plugins and themes related to spaces that are gitunignored right now can be outsourced to their own repositories in the future so they can also be installed with Composer (for production use).
 
-1. Add the `repo` (Git URL) of your Bedrock WordPress project in the corresponding `group_vars/<environment>/wordpress_sites.yml` file
-2. Set the `branch` you want to deploy
-3. Run `./bin/deploy.sh <environment> <site name>`
-4. To rollback a deploy, run `ansible-playbook rollback.yml -e "site=<site name> env=<environment>"`
+You should have a folder structure like this:
 
-[Read the deploys docs](https://roots.io/trellis/docs/deploys/) for more information.
+```sh
+doll                  # Project directory
+├─── spaces           # Public Spaces repository (Open Source), used by (most) clients.
+├─── trellis          # Personal fork of Trellis for development
+|    └── group_vars
+|        └── development
+|            └── wordpress_sites.yml  # Add all your instances here
+└── trellis-client1                   # Private Fork of Trellis to provision and deploy to server of Client 1
+└── trellis-client2                   # Private Fork of Trellis to provision and deploy to server of Client 2
 
-## Contributing
+```
 
-Contributions are welcome from everyone. We have [contributing guidelines](https://github.com/roots/guidelines/blob/master/CONTRIBUTING.md) to help you get started.
+## Use a database from your live server in your development environment
 
-## Trellis sponsors
+Put the dump into your `trellis` directory, then enter your virtual machine and import using WP-CLI:
 
-Help support our open-source development efforts by [becoming a patron](https://www.patreon.com/rootsdev).
+```sh
+    vagrant ssh
+    cd /srv/www/spaces/current
+    wp db import /home/vagrant/trellis/YOUR_DATABASE_DUMP.sql
+```
 
-<a href="https://kinsta.com/?kaid=OFDHAJIXUDIV"><img src="https://cdn.roots.io/app/uploads/kinsta.svg" alt="Kinsta" width="200" height="150"></a> <a href="https://www.harnessup.com/"><img src="https://cdn.roots.io/app/uploads/harness-software.svg" alt="Harness Software" width="200" height="150"></a> <a href="https://k-m.com/"><img src="https://cdn.roots.io/app/uploads/km-digital.svg" alt="KM Digital" width="200" height="150"></a> <a href="https://www.itineris.co.uk/"><img src="https://cdn.roots.io/app/uploads/itineris.svg" alt="itineris" width="200" height="150"></a> <a href="https://www.hebergeurweb.ca"><img src="https://cdn.roots.io/app/uploads/hebergeurweb.svg" alt="Hébergement Web Québec" width="200" height="150"></a>
+You probably need to search and replace the old domain with `spaces.test`:
 
-## Community
-
-Keep track of development and community news.
-
-* Participate on the [Roots Discourse](https://discourse.roots.io/)
-* Follow [@rootswp on Twitter](https://twitter.com/rootswp)
-* Read and subscribe to the [Roots Blog](https://roots.io/blog/)
-* Subscribe to the [Roots Newsletter](https://roots.io/subscribe/)
-* Listen to the [Roots Radio podcast](https://roots.io/podcast/)
+```sh
+    wp --url=spaces.kisd.local search-replace 'spaces.kisd.local' 'spaces.test' --all-tables --skip-columns=guid --precise --recurse-objects --verbose
+```
