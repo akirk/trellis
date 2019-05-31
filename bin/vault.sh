@@ -1,12 +1,9 @@
 #!/bin/bash
 shopt -s nullglob
 
-DEFAULT_FILES="group_vars/all/vault.yml group_vars/development/vault.yml group_vars/staging/vault.yml";
-
 show_usage() {
   echo "Usage: vault <command> [<options>...]
-Just a proxy of ansible-vault with default files:
-$DEFAULT_FILES
+Just a proxy of ansible-vault with all files named vault.yml under the group_vars folder.
 
 See 'ansible-vault --help' for more information.
 
@@ -28,11 +25,6 @@ do
   [[ $arg = -h ]] && { show_usage; exit 0; }
 done
 
-COMMAND="$1"; shift
-FILES=$@;
-
-[[ $# -lt 1 ]] && { FILES="$DEFAULT_FILES"; }
-
-VAULT_CMD="ansible-vault $COMMAND $FILES"
+VAULT_CMD="find group_vars/ -name vault.yml -exec ansible-vault $1 {} +"
 
 $VAULT_CMD
