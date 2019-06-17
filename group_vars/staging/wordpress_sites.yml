@@ -9,7 +9,7 @@ wordpress_sites:
         # redirects:
         #   - otherdomain.com
     local_path: ../spaces # path targeting local Bedrock site directory (relative to Ansible root)
-    repo: git@bitbucket.org:lukasbesch/spaces.git # replace with your Git repo URL
+    repo: git@github.com:dol-lab/spaces.git # replace with your Git repo URL
     repo_subtree_path: . # relative path to your Bedrock/WP directory in your repo
     branch: master
     multisite:
