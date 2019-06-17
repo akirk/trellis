@@ -15,6 +15,8 @@ Be sure to have installed the following requirements:
 - [Vagrant](https://www.vagrantup.com/downloads.html) >= 2.1.0
 - [vagrant-hostmanager](https://github.com/devopsgroup-io/vagrant-hostmanager) (optional)
 - **Windows user?** [Read the Windows getting started docs](https://roots.io/getting-started/docs/windows-development-environment-trellis/) for slightly different installation instructions.
+   - install `vagrant plugins install vagrant-faster`
+   - and `vagrant plugin install vagrant-winnfsd` in the trellis folder.
 
 ### 1. Clone Repository
 
@@ -41,7 +43,7 @@ This will take 10-30 minutes on your first run and set up a virtual server from 
     vagrant up
 ```
 
-### 3. SSH into your (local virtual vagrant) server to run commands.
+### 3. SSH into your (local virtual vagrant) server to run commands
 
 ```sh
     vagrant ssh -- -t 'cd /srv/www/spaces/current; /bin/bash'
@@ -93,5 +95,5 @@ Put the dump into your `trellis` directory, then enter your virtual machine and 
 You probably need to search and replace the old domain with `spaces.test`:
 
 ```sh
-    wp --url=spaces.kisd.local search-replace 'spaces.kisd.local' 'spaces.test' --all-tables --skip-columns=guid --precise --recurse-objects --verbose
+    wp --url=spaces.kisd.local search-replace 'spaces.kisd.de' 'spaces.test' --all-tables --skip-columns=guid --precise --recurse-objects --verbose
 ```
