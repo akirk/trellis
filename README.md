@@ -23,9 +23,9 @@ Be sure to have installed the following requirements:
     mkdir doll
     cd doll
     # Clone Trellis into `trellis` and checkout `spaces` branch.
-    git clone --recursive git@bitbucket.org:lukasbesch/trellis-spaces.git trellis -b spaces
+    git clone --recursive git@github.com:dol-lab/trellis.git trellis
     # Clone Spaces into `spaces` and checkout `merge-bedrock` branch.
-    git clone --recursive git@bitbucket.org:lukasbesch/spaces.git spaces -b merge-bedrock
+    git clone --recursive git@github.com:dol-lab/spaces.git spaces
 ```
 
 Checkout the [instructions how to manage (multiple) remote instances](#markdown-header-managing-multiple-remote-instances).
