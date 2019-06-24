@@ -43,18 +43,17 @@ This will take 10-30 minutes on your first run and set up a virtual server from 
     vagrant up
 ```
 
-### 3. SSH into your (local virtual vagrant) server to run commands
+### 3. Done! Access via `spaces.test`
+
+You can execute [WP-CLI Commands](https://developer.wordpress.org/cli/commands/) on the virtual machine.
 
 ```sh
+    # ... in the trellis folder:
     vagrant ssh -- -t 'cd /srv/www/spaces/current; /bin/bash'
-    # run commands from here, for example:
-    # composer install
+    # generate 10 dummy users:
+    # wp user generate --count=10
     exit
 ```
-
-### 4. done :) access via *spaces.test*
-
----
 
 ## Managing (multiple) remote instances
 
