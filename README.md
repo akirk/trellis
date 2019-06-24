@@ -15,7 +15,7 @@ Be sure to have installed the following requirements:
 - [Vagrant](https://www.vagrantup.com/downloads.html) >= 2.1.0
 - [vagrant-hostmanager](https://github.com/devopsgroup-io/vagrant-hostmanager) (optional)
 - **Windows user?** [Read the Windows getting started docs](https://roots.io/getting-started/docs/windows-development-environment-trellis/) for slightly different installation instructions.
-   - install `vagrant plugins install vagrant-faster`
+   - install `vagrant plugin install vagrant-faster`
    - and `vagrant plugin install vagrant-winnfsd` in the trellis folder.
 
 ### 1. Clone Repository
