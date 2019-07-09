@@ -17,6 +17,7 @@ Be sure to have installed the following requirements:
 - **Windows user?** [Read the Windows getting started docs](https://roots.io/getting-started/docs/windows-development-environment-trellis/) for slightly different installation instructions.
    - install `vagrant plugin install vagrant-faster`
    - and `vagrant plugin install vagrant-winnfsd` in the trellis folder.
+   - [known bug with libssl](https://discourse.roots.io/t/trellis-dev-server-vagrant-up-stuck-libssl1-1-amd64-python-error/15887/3)
 
 ### 1. Clone Repository
 
