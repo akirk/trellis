@@ -26,9 +26,9 @@ Be sure to have installed the following requirements:
     mkdir doll
     cd doll
     # Clone Trellis into `trellis` folder.
-    git clone git@github.com:dol-lab/trellis.git trellis
+    git clone git@github.com:dol-lab/trellis.git
     # Clone Spaces into `spaces` folder.
-    git clone git@github.com:dol-lab/spaces.git spaces
+    git clone git@github.com:dol-lab/spaces.git
 ```
 
 Checkout the [instructions how to manage (multiple) remote instances](#markdown-header-managing-multiple-remote-instances).
@@ -51,9 +51,13 @@ You can execute [WP-CLI Commands](https://developer.wordpress.org/cli/commands/)
 ```sh
     # ... in the trellis folder:
     vagrant ssh -- -t 'cd /srv/www/spaces/current; /bin/bash'
-    # generate 10 dummy users:
-    # wp user generate --count=10
-    exit
+    composer install
+    composer install-dependencies
+
+    # or more useful things like WP-CLI https://developer.wordpress.org/cli/commands/
+    # crate users
+    wp user generate --count=10
+    wp post create --post_title='Post!' --post_status=publish --post_author=1 --post_content='R2D2'
 ```
 
 ## Managing (multiple) remote instances
