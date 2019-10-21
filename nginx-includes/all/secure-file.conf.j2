@@ -1,0 +1,5 @@
+# see https://roots.io/trellis/docs/nginx-includes/
+if (-e $request_filename) {
+  # dont't allow access to the uploads folder. we stream all files.
+  rewrite ^(/[_\-0-9a-z]+)?/uploads/(.+)$ /wp-config.php?sfile=$2 last;
+}
