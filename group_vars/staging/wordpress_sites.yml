@@ -15,7 +15,7 @@ wordpress_sites:
       enabled: true
       subdomains: false   # Set to true if you're using a subdomain multisite install
     ssl:
-      enabled: false
+      enabled: true
       provider: letsencrypt
     cache:
       enabled: false
