@@ -1,0 +1,10 @@
+---
+- name: "Update Dotenv"
+  hosts: web:&development
+  become: yes
+  remote_user: vagrant
+
+  tasks:
+  - import_role:
+      name: wordpress-install
+      tasks_from: dotenv
