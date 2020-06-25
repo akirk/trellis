@@ -49,7 +49,7 @@ project_current_path: "{{ project.current_path | default('current') }}"
 update_db_on_deploy: true
 
 # Most scripts are used in development instead of remote servers. Use with caution.
-composer_no_scripts: false
+composer_no_scripts: true
 # Whether to autoload classes from classmap only.
 composer_classmap_authoritative: true
 
