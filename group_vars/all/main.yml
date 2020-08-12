@@ -8,6 +8,9 @@ apt_dev_package_state: latest
 ntp_timezone: Etc/UTC
 ntp_manage_config: true
 www_root: /srv/www
+# XXX: Replace this email with the one of your admin
+letsencrypt_contact_emails:
+  - doll@kisd.de
 
 # Values of raw_vars will be wrapped in `{% raw %}` to avoid templating problems if values include `{%` and `{{`.
 # Will recurse dicts/lists. `*` is wildcard for one or more dict keys, list indices, or strings. Example:
