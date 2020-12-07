@@ -21,4 +21,4 @@ wordpress_sites:
     env:
       domain_current_site: spaces.test
       update_wp_theme_paths: yes
-      additional_composer: "{{ more_composer_dependencies }}"
+      more_composer_dependencies: "{{ more_composer_dependencies }}"

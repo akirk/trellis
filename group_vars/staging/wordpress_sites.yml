@@ -13,7 +13,7 @@ wordpress_sites:
     branch: master
     multisite:
       enabled: true
-      subdomains: false   # Set to true if you're using a subdomain multisite install
+      subdomains: false # Set to true if you're using a subdomain multisite install
     ssl:
       enabled: true
       provider: letsencrypt
@@ -21,4 +21,4 @@ wordpress_sites:
       enabled: false
     env:
       domain_current_site: staging.spaces.kisd.de
-      additional_composer: "{{ more_composer_dependencies }}"
+      more_composer_dependencies: "{{ more_composer_dependencies }}"
