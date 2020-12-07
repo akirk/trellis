@@ -24,12 +24,7 @@
     - { role: memcached, tags: [memcached] }
     - { role: nginx, tags: [nginx] }
     - { role: logrotate, tags: [logrotate] }
-    - {
-        role: composer,
-        tags: [composer],
-        composer_version: "1.10.16",
-        composer_keep_updated: false,
-      }
+    - { role: composer, tags: [composer] }
     - { role: wp-cli, tags: [wp-cli] }
     - { role: wordpress-setup, tags: [wordpress, wordpress-setup] }
     - { role: wordpress-install, tags: [wordpress, wordpress-install] }
