@@ -1,7 +1,7 @@
 # Trellis for Spaces
 
 Contains a WordPress LEMP stack for local development and to provision and deploy to remote servers for the SLE Spaces.
-Fork of [Trellis](https://github.com/roots/trellis) with minor adjustments.
+Fork of [Trellis](https://github.com/roots/trellis) with minor adjustments ([our changelog](DOLL-CHANGELOG.md)).
 Checkout the Trellis [Documentation](https://roots.io/trellis/docs) and [GitHub repository](https://github.com/roots/trellis).
 
 

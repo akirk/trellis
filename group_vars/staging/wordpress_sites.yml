@@ -21,3 +21,4 @@ wordpress_sites:
       enabled: false
     env:
       domain_current_site: staging.spaces.kisd.de
+      additional_composer: "{{ more_composer_dependencies }}"

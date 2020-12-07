@@ -22,4 +22,4 @@ vault_wordpress_sites:
       secure_auth_salt: "generateme"
       logged_in_salt: "generateme"
       nonce_salt: "generateme"
-      file_salt: "generateme" # for sfile plugin
+      file_salt: "generateme" # custom dol-lab: for sfile plugin

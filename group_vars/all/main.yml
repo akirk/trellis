@@ -1,4 +1,6 @@
 composer_keep_updated: true
+# dol-lab custom: link to a custom composer file (git repo or gist) to extend your base repo.
+more_composer_dependencies: ~
 apt_cache_valid_time: 3600
 apt_package_state: present
 apt_security_package_state: latest
@@ -21,3 +23,4 @@ raw_vars:
   - vault_users.*.salt
   - vault_wordpress_env_defaults
   - vault_wordpress_sites
+  - more_composer_dependencies

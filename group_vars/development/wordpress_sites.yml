@@ -12,7 +12,7 @@ wordpress_sites:
     admin_email: admin@spaces.test
     multisite:
       enabled: true
-      subdomains: false   # Set to true if you're using a subdomain multisite install
+      subdomains: false # Set to true if you're using a subdomain multisite install
     ssl:
       enabled: false
       provider: self-signed
@@ -21,3 +21,4 @@ wordpress_sites:
     env:
       domain_current_site: spaces.test
       update_wp_theme_paths: yes
+      additional_composer: "{{ more_composer_dependencies }}"
