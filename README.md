@@ -9,6 +9,8 @@ Checkout the Trellis [Documentation](https://roots.io/trellis/docs) and [GitHub 
 
 ### [1. Install the requirements](https://github.com/roots/trellis#requirements)
 
+Note that the newest version of Virtualbox is not compatible at the moment. Please use Virtualbox Version 6.1.26. [You can download it here](https://www.virtualbox.org/wiki/Download_Old_Builds_6_1)
+
 ### 2. Clone Repository
 
 ```sh
