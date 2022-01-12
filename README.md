@@ -65,7 +65,7 @@ For provisioning and deploying, read the [Remote Server Setup Documentation](htt
 Be sure to encrypt sensitive data using a [`.vault_pass`](https://roots.io/trellis/docs/vault/) file! (check `./bin/vault.sh`).
 
 Also create forks for the Spaces repository and clone them next to the `trellis` folder.
-Ideally, they should have a child theme and eventually slightly different plugins defined in `composer.json`. Plugins and themes related to spaces that are gitunignored right now can be outsourced to their own repositories in the future so they can also be installed with Composer (for production use).
+Ideally, they should have a child theme and eventually slightly different plugins defined in `composer.json`. Plugins and themes related to spaces that are git-un-ignored right now can be outsourced to their own repositories in the future so they can also be installed with Composer (for production use).
 
 You should have a folder structure like this:
 
