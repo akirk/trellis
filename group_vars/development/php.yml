@@ -9,3 +9,4 @@ php_memory_limit: 256M
 xdebug_mode: 'debug'
 xdebug_start_with_request: 'yes'
 xdebug_discover_client_host: 1
+xdebug_log_level: 0

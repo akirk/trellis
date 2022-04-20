@@ -5,6 +5,9 @@ https://github.com/dol-lab/
 We use trellis for provisioning spaces servers and merge their updates.
 In this changelog you find the (significant) "customizations" we did.
 
+### April 2022
+* Set xdebug.log_level to 0
+
 ### December 2020
 * We added the variable ``composer_env_dependencies`` (``group_vars/all/main.yml``) It contains a cloneable repo/gist with a composer.json, which can be used to extend the composer.json in the root of your repository.
 * Undo composer version limitation (from October).
