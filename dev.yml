@@ -10,7 +10,11 @@
     - { role: ferm, tags: [ferm] }
     - { role: ntp, tags: [ntp] }
     - { role: sshd, tags: [sshd] }
-    - { role: mariadb, tags: [mariadb] }
+    - {
+        role: mariadb,
+        tags: [mariadb],
+        vars: [ansible_python_interpreter: "/usr/bin/python3"],
+      }
     - { role: mailhog, tags: [mailhog, mail] }
     - { role: php, tags: [php] }
     - { role: xdebug, tags: [php, xdebug] }
