@@ -1,5 +1,6 @@
 # dol-lab custom: link to a custom composer file (git repo or gist) to extend your base repo.
 more_composer_dependencies: ~
+cron_interval_multisite: "*/1440" # every 1440 minute. @see /etc/cron.d/wordpress-multisite-spaces
 apt_cache_valid_time: 3600
 apt_package_state: present
 apt_security_package_state: latest

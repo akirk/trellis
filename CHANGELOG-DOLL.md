@@ -5,6 +5,9 @@ https://github.com/dol-lab/
 We use trellis for provisioning spaces servers and merge their updates.
 In this changelog you find the (significant) "customizations" we did.
 
+### Mai 2022
+* Run multisite cron less often (cron_interval_multisite). (New job was started before the old one was finished...)
+
 ### April 2022
 * Set xdebug.log_level to 0
 
