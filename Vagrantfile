@@ -119,6 +119,7 @@ Vagrant.configure('2') do |config|
       ansible.pip_install_cmd = 'sudo apt-get install -y -qq python3-pip'
       ansible.provisioning_path = provisioning_path
       ansible.version = vconfig.fetch('vagrant_ansible_version')
+      ansible.vault_password_file = ".vault_pass"
     end
 
     ansible.compatibility_mode = '2.0'
